@@ -22,7 +22,7 @@ export default function ProductList() {
       <h1>Product List</h1>
       <ul>
         {products &&
-          products.map((product) => (
+          products.map((product: { title: string; description: string; _id: string }) => (
             <li key={product._id}>
               {product.title} - {product.description}
             </li>
