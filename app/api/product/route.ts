@@ -1,7 +1,7 @@
 import { Product } from "@/model/Product";
 import connectDB from "@/config/connection";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 export async function GET(req: Request) {
   try {
     await connectDB();
