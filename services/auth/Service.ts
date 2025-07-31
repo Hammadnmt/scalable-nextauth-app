@@ -10,12 +10,12 @@ const authService = {
     }
     return await User.findOne({ email: email });
   },
-  validateUser: async (user: { email: string; password: string }, plainPassword) => {
+  validateUser: async (user: { email: string; password: string }, plainPassword: string) => {
     if (!user || !plainPassword) {
       throw new Error("User and password are required for validation");
     }
     return user.password === plainPassword;
   },
-  registerUser: async (userData) => {},
+  // registerUser: async (userData) => {},
 };
 export default authService;

@@ -1,4 +1,4 @@
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, RequestInternal, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import authService from "@/services/auth/Service";
 
@@ -10,7 +10,11 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(
+        credentials: Record<"email" | "password", string> | undefined,
+        req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
+      ) {
+        if (!credentials) return null;
         const user = await authService.findUserByEmail(credentials?.email);
         if (!user) return null;
         const isValid = await authService.validateUser(user, credentials?.password);
@@ -25,7 +29,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      session.user = token.user;
+      session.user = token.user as typeof session.user;
       return session;
     },
   },
