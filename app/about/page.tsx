@@ -1,5 +1,8 @@
+"use client";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 export default function about() {
-  return <div>About</div>;
+  const { data } = useSession();
+  return <div>{data?.user?.email}</div>;
 }

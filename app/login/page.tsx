@@ -23,7 +23,7 @@ export default function Page() {
       email: formData.email,
       password: formData.password,
       redirect: true,
-      callbackUrl: "/product",
+      callbackUrl: "/about",
     });
     if (response?.ok) {
       console.log("SignIn response:", response);
